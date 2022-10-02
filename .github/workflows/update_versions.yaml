@@ -35,23 +35,17 @@ jobs:
           poetry version "${V_VERSION//v/}"
       - name: Update internal VERSION string
         run: echo VERSION = \"${{ steps.update_semver.outputs.tag }}\" > fritz_datacollector/_version.py
-      - name: Commit pyproject.toml and Chart.yaml back to repo
+      - name: Commit version files back to repo
         run: |
           git config --local user.name github-actions
           git config --local user.email github-actions@github.com
           git add pyproject.toml fritz_datacollector/_version.py
           git commit -m "Update version files to ${{ steps.update_semver.outputs.tag }}"
-      - name: Push version updates back to master
+      - name: Push version updates back to main
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.MASTER_PUSH_TOKEN }}
           branch: ${{ github.ref }}
-      - name: Push SemVer release tag
-        uses: K-Phoen/semver-release-action@master
-        with:
-          release_branch: main
-        env:
-          GITHUB_TOKEN: ${{ secrets.MASTER_PUSH_TOKEN }}
 
   tag-release:
     runs-on: ubuntu-latest
@@ -60,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          ref: main
       - name: Push SemVer release tag
         uses: K-Phoen/semver-release-action@master
         with:
