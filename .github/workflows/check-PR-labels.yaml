@@ -35,9 +35,14 @@ jobs:
           release_strategy: none
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: mdecoleman/pr-branch-name@1.2.0
+        id: pr_branch
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: ${{ steps.vars.outputs.branch }}
       - name: Setup poetry
         uses: abatilo/actions-poetry@v2
         with:
@@ -57,4 +62,4 @@ jobs:
       - name: Push version updates back to PR
         uses: ad-m/github-push-action@master
         with:
-          branch: ${{ github.ref }}
+          branch: ${{ steps.vars.outputs.branch }}
