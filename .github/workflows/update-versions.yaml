@@ -30,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.MASTER_PUSH_TOKEN }}
       - uses: actions-ecosystem/action-release-label@v1
         id: release-label
         with:
