@@ -34,7 +34,7 @@ jobs:
           V_VERSION=${{ steps.update_semver.outputs.tag }}
           poetry version "${V_VERSION//v/}"
       - name: Update internal VERSION string
-        run: echo VERSION = "${{ steps.update_semver.outputs.tag }}" > fritz_datacollector/_version.py
+        run: echo VERSION = \"${{ steps.update_semver.outputs.tag }}\" > fritz_datacollector/_version.py
       - name: Commit pyproject.toml and Chart.yaml back to repo
         run: |
           git config --local user.name github-actions
