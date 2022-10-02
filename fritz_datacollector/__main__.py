@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
+from ._version import VERSION
 from .routers import data
 
 app = FastAPI()
@@ -25,7 +26,7 @@ def register_exception(app: FastAPI):
 
 @app.get("/")
 async def root():
-    return {"source": "fritz_datacollector", "version": "0.0.1"}
+    return {"source": "fritz_datacollector", "version": VERSION}
 
 
 def main():
