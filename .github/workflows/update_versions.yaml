@@ -1,4 +1,4 @@
-name: Update versions
+name: Update versions and release
 
 on:
   pull_request:
@@ -46,6 +46,21 @@ jobs:
         with:
           github_token: ${{ secrets.MASTER_PUSH_TOKEN }}
           branch: ${{ github.ref }}
+      - name: Push SemVer release tag
+        uses: K-Phoen/semver-release-action@master
+        with:
+          release_branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.MASTER_PUSH_TOKEN }}
+
+  tag-release:
+    runs-on: ubuntu-latest
+    name: Tag release
+    needs: update-versions
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Push SemVer release tag
         uses: K-Phoen/semver-release-action@master
         with:
