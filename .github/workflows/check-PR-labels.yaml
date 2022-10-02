@@ -27,14 +27,21 @@ jobs:
     if: ${{ needs.check-label.outputs.pr_tags_present == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Compute next SemVer
-        id: update_semver
-        uses: K-Phoen/semver-release-action@master
+      - uses: actions-ecosystem/action-release-label@v1
+        id: release-label
         with:
-          release_branch: main
-          release_strategy: none
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          label_prefix: ""
+      - name: Get latest Tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+        with:
+          semver_only: true
+      - uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
+        if: ${{ steps.release-label.outputs.level != null }}
+        with:
+          current_version: ${{ steps.get-latest-tag.outputs.tag }}
+          level: ${{ steps.release-label.outputs.level }}
       - uses: mdecoleman/pr-branch-name@1.2.0
         id: pr_branch
         with:
@@ -42,23 +49,23 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: ${{ steps.vars.outputs.branch }}
+          ref: ${{ steps.pr_branch.outputs.branch }}
       - name: Setup poetry
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: 1.2.1
       - name: Update version in pyproject.toml
         run: |
-          V_VERSION=${{ steps.update_semver.outputs.tag }}
+          V_VERSION=${{ steps.bump-semver.outputs.new_version }}
           poetry version "${V_VERSION//v/}"
       - name: Update internal VERSION string
-        run: echo VERSION = \"${{ steps.update_semver.outputs.tag }}\" > fritz_datacollector/_version.py
+        run: echo VERSION = \"${{ steps.bump-semver.outputs.new_version }}\" > fritz_datacollector/_version.py
       - name: Commit version files back to repo
         run: |
           git config --local user.name github-actions
           git config --local user.email github-actions@github.com
           git add pyproject.toml fritz_datacollector/_version.py
-          git commit -m "Update version files to ${{ steps.update_semver.outputs.tag }}"
+          git commit -m "Update version files to ${{ steps.bump-semver.outputs.new_version }}"
       - name: Push version updates back to PR
         uses: ad-m/github-push-action@master
         with:
