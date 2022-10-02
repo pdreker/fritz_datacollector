@@ -8,53 +8,13 @@ on:
       - closed
 
 jobs:
-  update-versions:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.merged
-    name: Tag release
-    steps:
-      - name: Compute next SemVer
-        id: update_semver
-        uses: K-Phoen/semver-release-action@master
-        with:
-          release_branch: main
-          release_strategy: none
-        env:
-          GITHUB_TOKEN: ${{ secrets.MASTER_PUSH_TOKEN }}
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Setup poetry
-        uses: abatilo/actions-poetry@v2
-        with:
-          poetry-version: 1.2.1
-      - name: Update version in pyproject.toml
-        run: |
-          V_VERSION=${{ steps.update_semver.outputs.tag }}
-          poetry version "${V_VERSION//v/}"
-      - name: Update internal VERSION string
-        run: echo VERSION = \"${{ steps.update_semver.outputs.tag }}\" > fritz_datacollector/_version.py
-      - name: Commit version files back to repo
-        run: |
-          git config --local user.name github-actions
-          git config --local user.email github-actions@github.com
-          git add pyproject.toml fritz_datacollector/_version.py
-          git commit -m "Update version files to ${{ steps.update_semver.outputs.tag }}"
-      - name: Push version updates back to main
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.MASTER_PUSH_TOKEN }}
-          branch: ${{ github.ref }}
-
   tag-release:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged
     name: Tag release
     needs: update-versions
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: main
       - name: Push SemVer release tag
         uses: K-Phoen/semver-release-action@master
         with:
