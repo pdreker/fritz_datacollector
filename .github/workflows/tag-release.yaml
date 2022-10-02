@@ -39,7 +39,7 @@ jobs:
         run: |
           git config --local user.name github-actions
           git config --local user.email github-actions@github.com
-          git add pyproject.toml fritzexporter/_version.py helm/fritz-exporter/Chart.yaml
+          git add pyproject.toml fritz_datacollector/_version.py
           git commit -m "Update version files to ${{ steps.update_semver.outputs.tag }}"
       - name: Push version updates back to master
         uses: ad-m/github-push-action@master
