@@ -3,7 +3,7 @@ name: check PR labels
 on:
   pull_request:
     branches:
-      - master
+      - main
     types: ["opened", "synchronize", "labeled", "unlabeled"]
 
 jobs:
