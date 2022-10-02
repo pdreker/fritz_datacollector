@@ -8,6 +8,7 @@ on:
 
 jobs:
   check-label:
+    name: Check PR labelling
     runs-on: ubuntu-latest
     outputs:
       pr_tags_present: ${{ steps.pr_label_check.outputs.label_check }}
@@ -23,6 +24,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           allow_failure: true
   update-versions:
+    name: Update version files
     needs: check-label
     if: ${{ needs.check-label.outputs.pr_tags_present == 'success' }}
     runs-on: ubuntu-latest
