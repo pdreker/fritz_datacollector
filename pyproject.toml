@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fritz-datacollector"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Patrick Dreker <patrick@dreker.de>"]
 readme = "README.md"
