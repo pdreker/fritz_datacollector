@@ -1,4 +1,4 @@
-name: Tag release
+name: Update versions
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
       - closed
 
 jobs:
-  tag-release:
+  update-versions:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged
     name: Tag release
