@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          token: ${{ secrets.MASTER_PUSH_TOKEN }}
       - uses: actions-ecosystem/action-release-label@v1
         id: release-label
         with:
