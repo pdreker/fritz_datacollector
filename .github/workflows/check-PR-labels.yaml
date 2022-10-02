@@ -1,4 +1,4 @@
-name: check PR labels
+name: Update versions
 
 on:
   pull_request:
@@ -66,12 +66,13 @@ jobs:
       - name: Update internal VERSION string
         run: echo VERSION = \"${{ steps.bump-semver.outputs.new_version }}\" > fritz_datacollector/_version.py
       - name: Commit version files back to repo
+        continue-on-error: true
         run: |
           git config --local user.name github-actions
           git config --local user.email github-actions@github.com
           git add pyproject.toml fritz_datacollector/_version.py
           git diff --exit-code
-          git commit --allow-empty -m "Update version files to ${{ steps.bump-semver.outputs.new_version }}"
+          git commit -m "Update version files to ${{ steps.bump-semver.outputs.new_version }}"
       - name: Push version updates back to PR
         uses: ad-m/github-push-action@master
         with:
