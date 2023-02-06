@@ -35,7 +35,7 @@ jobs:
       - name: Build and push
         env:
           TAG: develop
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           context: .
