@@ -48,7 +48,7 @@ jobs:
         with:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
           level: ${{ steps.release-label.outputs.level }}
-      - uses: mdecoleman/pr-branch-name@1.2.0
+      - uses: mdecoleman/pr-branch-name@2.0.0
         id: pr_branch
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -59,7 +59,7 @@ jobs:
       - name: Setup poetry
         uses: abatilo/actions-poetry@v2
         with:
-          poetry-version: 1.2.1
+          poetry-version: 1.6.1
       - name: Update version in pyproject.toml
         run: |
           V_VERSION=${{ steps.bump-semver.outputs.new_version }}
