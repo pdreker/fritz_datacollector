@@ -13,7 +13,7 @@ jobs:
       DOCKERHUB_USERNAME: pdreker
       IMAGE: fritz_datacollector
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: generate docker tags
         id: meta
         uses: docker/metadata-action@v5
