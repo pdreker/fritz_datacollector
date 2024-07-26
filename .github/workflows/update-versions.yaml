@@ -29,7 +29,7 @@ jobs:
     if: ${{ needs.check-label.outputs.pr_tags_present == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.MASTER_PUSH_TOKEN }}
           persist-credentials: false
@@ -52,7 +52,7 @@ jobs:
         id: pr_branch
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ steps.pr_branch.outputs.branch }}
