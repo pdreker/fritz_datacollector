@@ -1,4 +1,4 @@
-FROM python:3.12.1-alpine
+FROM python:3.12.5-alpine
 
 LABEL Name=fritz_datacollector
 EXPOSE 8000
