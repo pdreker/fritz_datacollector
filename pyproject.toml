@@ -21,7 +21,7 @@ fastapi = "^0.112.2"
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.11"
 black = "^24.4.2"
-flake8 = "^6.1.0"
+flake8 = "^7.1.1"
 pytest = "^7.4.2"
 pytest-cov = "^4.1.0"
 flake8-bugbear = "^24.4.26"
