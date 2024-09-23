@@ -16,7 +16,7 @@ testpaths = [
 [tool.poetry.dependencies]
 python = "^3.10"
 uvicorn = "^0.30.6"
-fastapi = "^0.112.2"
+fastapi = "^0.115.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.11"
