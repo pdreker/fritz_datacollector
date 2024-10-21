@@ -19,7 +19,7 @@ uvicorn = "^0.30.6"
 fastapi = "^0.112.2"
 
 [tool.poetry.group.dev.dependencies]
-mypy = "^1.11"
+mypy = "^1.12"
 black = "^24.4.2"
 flake8 = "^7.1.1"
 pytest = "^8.3.2"
