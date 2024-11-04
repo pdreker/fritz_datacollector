@@ -23,20 +23,22 @@ trio = ["trio (<0.22)"]
 
 [[package]]
 name = "attrs"
-version = "22.1.0"
+version = "24.2.0"
 description = "Classes Without Boilerplate"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.7"
 files = [
-    {file = "attrs-22.1.0-py2.py3-none-any.whl", hash = "sha256:86efa402f67bf2df34f51a335487cf46b1ec130d02b8d39fd248abfd30da551c"},
-    {file = "attrs-22.1.0.tar.gz", hash = "sha256:29adc2665447e5191d0e7c568fde78b21f9672d344281d0c6e1ab085429b22b6"},
+    {file = "attrs-24.2.0-py3-none-any.whl", hash = "sha256:81921eb96de3191c8258c199618104dd27ac608d9366f5e35d011eae1867ede2"},
+    {file = "attrs-24.2.0.tar.gz", hash = "sha256:5cfb1b9148b5b086569baec03f20d7b6bf3bcacc9a42bebf87ffaaca362f6346"},
 ]
 
 [package.extras]
-dev = ["cloudpickle", "coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy (>=0.900,!=0.940)", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "sphinx", "sphinx-notfound-page", "zope.interface"]
-docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
-tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "zope.interface"]
-tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
+benchmark = ["cloudpickle", "hypothesis", "mypy (>=1.11.1)", "pympler", "pytest (>=4.3.0)", "pytest-codspeed", "pytest-mypy-plugins", "pytest-xdist[psutil]"]
+cov = ["cloudpickle", "coverage[toml] (>=5.3)", "hypothesis", "mypy (>=1.11.1)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "pytest-xdist[psutil]"]
+dev = ["cloudpickle", "hypothesis", "mypy (>=1.11.1)", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "pytest-xdist[psutil]"]
+docs = ["cogapp", "furo", "myst-parser", "sphinx", "sphinx-notfound-page", "sphinxcontrib-towncrier", "towncrier (<24.7)"]
+tests = ["cloudpickle", "hypothesis", "mypy (>=1.11.1)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "pytest-xdist[psutil]"]
+tests-mypy = ["mypy (>=1.11.1)", "pytest-mypy-plugins"]
 
 [[package]]
 name = "black"
@@ -240,17 +242,17 @@ flake8 = ">=3.0.0"
 
 [[package]]
 name = "flake8-bugbear"
-version = "24.4.26"
+version = "24.10.31"
 description = "A plugin for flake8 finding likely bugs and design problems in your program. Contains warnings that don't belong in pyflakes and pycodestyle."
 optional = false
 python-versions = ">=3.8.1"
 files = [
-    {file = "flake8_bugbear-24.4.26-py3-none-any.whl", hash = "sha256:cb430dd86bc821d79ccc0b030789a9c87a47a369667f12ba06e80f11305e8258"},
-    {file = "flake8_bugbear-24.4.26.tar.gz", hash = "sha256:ff8d4ba5719019ebf98e754624c30c05cef0dadcf18a65d91c7567300e52a130"},
+    {file = "flake8_bugbear-24.10.31-py3-none-any.whl", hash = "sha256:cccf786ccf9b2e1052b1ecfa80fb8f80832d0880425bcbd4cd45d3c8128c2683"},
+    {file = "flake8_bugbear-24.10.31.tar.gz", hash = "sha256:435b531c72b27f8eff8d990419697956b9fd25c6463c5ba98b3991591de439db"},
 ]
 
 [package.dependencies]
-attrs = ">=19.2.0"
+attrs = ">=22.2.0"
 flake8 = ">=6.0.0"
 
 [package.extras]
@@ -610,4 +612,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "d4585657daed335997b8c870d2cac302a718484ba8988a0e09da796c64ae4d67"
+content-hash = "9a3090a7d5ace5fade30d68fe6de1072825cd12656aaf7b957485a6ea8096bd4"
