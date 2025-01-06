@@ -57,7 +57,7 @@ jobs:
           fetch-depth: 0
           ref: ${{ steps.pr_branch.outputs.branch }}
       - name: Setup poetry
-        uses: abatilo/actions-poetry@v3
+        uses: abatilo/actions-poetry@v4
         with:
           poetry-version: 1.6.1
       - name: Update version in pyproject.toml
